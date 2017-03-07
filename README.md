@@ -13,6 +13,7 @@ The PHP code and the MYSQL import can be downloaded. I have setup the type 4 blo
 The only thing you must change is the include on line 7. This should contain something like:
 
 $db = @mysqli_connect("host address", "hostname", "password");
+
 @mysqli_select_db($db, "DB name");
 
 modified to meet your needs.
