@@ -11,6 +11,7 @@ There was originally going to be a type 1, blocks requiring further analysis, bu
 
 The PHP code and the MYSQL import can be downloaded. I have setup the type 4 blocks which I use, you can change them as you wish. There is also a type 5 with the record number set to zero.
 The only thing you must change is the include on line 7. This should contain something like:
+
 $db = @mysqli_connect("host address", "hostname", "password");
 @mysqli_select_db($db, "DB name");
 
