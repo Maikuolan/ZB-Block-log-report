@@ -1,7 +1,10 @@
 <?php 
 
 // open log file and setup storage
- include ("mikes/data.inc");
+// following is an include containing the declarations to access your MYSQL DB
+// you need to set this accordingly
+// the file info parameters must be contained in the variable $db
+ include ("xxx/yyy.inc");
  $filename = 'zbblock/vault/killed_log.csv';
  if (!file_exists($filename)) {
      print("$filename Does not Exist");
