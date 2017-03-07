@@ -4,11 +4,11 @@
 // following is an include containing the declarations to access your MYSQL DB
 // you need to set this accordingly
 // the file info parameters must be contained in the variable $db
- include ("xxx/yyy.inc");
+ include 'xxx/yyy.inc';
  $filename = 'zbblock/vault/killed_log.csv';
  if (!file_exists($filename)) {
      print("$filename Does not Exist");
-     exit;
+     exit; // what about touch()?
  }
 $csvFile = file($filename);
 $data = [];
@@ -64,7 +64,8 @@ print("<table><tr style=\"text-align: center\"><td>Time</td><td>Record</td><td s
         } else {
                $i = 0;
          print("</table>");
-    while ($i < (count($bots))) {
+		    $botsCount = count($bots);
+    while ($i < ($botsCount)) {
  // store totals for each block we dont list           
        mysqli_query ($db, "INSERT into zbblock set type = '2', date = '$last', why = '$bots[$i]', total = '$totals[$i]'");
                print("$last $bots[$i] $totals[$i]<br>");
@@ -167,8 +168,9 @@ print("<table><tr style=\"text-align: center\"><td>Time</td><td>Record</td><td s
           print ("No Data !!. ZBblock DB not updated.");
           exit;
         } else {
-// create new totals for the day     
-       while ($i < (count($bots))) {
+// create new totals for the day
+$botsCount= count($bots);
+       while ($i < ($botsCount)) {
             
        mysqli_query ($db, "INSERT into zbblock set type = '2', date = '$date', why = '$bots[$i]', total = '$totals[$i]'");
 
@@ -188,8 +190,9 @@ print("<table><tr style=\"text-align: center\"><td>Time</td><td>Record</td><td s
         print("To be checked $date = $checktot<br>");   
         print("Last Block Id = $record");
         print("</body></html>");
-// save log file and delete it                 
-        copy('zbblock/vault/killed_log.csv', 'zbblock/vault/copykilled_log.csv');
+	// save log file and delete it                 
+	// what about move/rename?
+	copy('zbblock/vault/killed_log.csv', 'zbblock/vault/copykilled_log.csv');
         unlink('zbblock/vault/killed_log.csv');
       }
 
