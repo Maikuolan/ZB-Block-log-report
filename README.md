@@ -1,4 +1,5 @@
 This is a simple PHP program which should sit in the site root. It reads the killed_log.csv produced by ZB Block, prints any blocks that are not on the excluded list, and keeps totals for the day. A mysql DB keeps summary totals by day. The record types on the DB are:
+
 2 - totals for the day for each excluded block type
 3 - total blocks for each day
 4 - block types that do not require listing
