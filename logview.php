@@ -65,7 +65,7 @@ print("<table><tr style=\"text-align: center\"><td>Time</td><td>Record</td><td s
                $i = 0;
          print("</table>");
 		    $botsCount = count($bots);
-    while ($i < ($botsCount)) {
+    while ($i < $botsCount) {
  // store totals for each block we dont list           
        mysqli_query ($db, "INSERT into zbblock set type = '2', date = '$last', why = '$bots[$i]', total = '$totals[$i]'");
                print("$last $bots[$i] $totals[$i]<br>");
@@ -142,7 +142,8 @@ print("<table><tr style=\"text-align: center\"><td>Time</td><td>Record</td><td s
         $found = 0;
 // increment uninterested total - one error type only
         $i = 0;
-        while ($i < (count($bots))) {
+	    $botsCount = count($bots);
+        while ($i < $botsCount) {
         if($found == 0) {
         if (stristr($why, $bots[$i])) {
             $totals[$i] = $totals[$i] + 1;
@@ -170,7 +171,7 @@ print("<table><tr style=\"text-align: center\"><td>Time</td><td>Record</td><td s
         } else {
 // create new totals for the day
 $botsCount= count($bots);
-       while ($i < ($botsCount)) {
+       while ($i < $botsCount) {
             
        mysqli_query ($db, "INSERT into zbblock set type = '2', date = '$date', why = '$bots[$i]', total = '$totals[$i]'");
 
