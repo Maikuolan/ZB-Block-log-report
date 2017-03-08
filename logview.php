@@ -20,8 +20,8 @@ $firstday = 0;
 $firstbot = 0;
 $checktot = 0;
 
-print("<html><body>");
-print("<table><tr style=\"text-align: center\"><td>Time</td><td>Record</td><td style=\"width: 100px\">Query</td><td>URL</td><td>Why Blocked</td><td style=\"width: 200px\">Referral</td></tr>");
+print('<html><body>');
+print('<table><tr style="text-align: center"><td>Time</td><td>Record</td><td style="width: 100px">Query</td><td>URL</td><td>Why Blocked</td><td style="width: 200px">Referral</td></tr>');
 // how far did we get last time
 $result = mysqli_query($db, "SELECT * FROM zbblock
 			WHERE type = 5
@@ -63,7 +63,7 @@ foreach ($csvFile as $line) {
             $last     = $date;
         } else {
             $i = 0;
-            print("</table>");
+            print('</table>');
             $botsCount = count($bots);
             while ($i < $botsCount) {
                 // store totals for each block we dont list           
@@ -75,7 +75,7 @@ foreach ($csvFile as $line) {
             mysqli_query($db, "INSERT into zbblock set type = '3', date = '$last', total = '$tot'");
             print("Total of Blocks on $last = $tot<br>");
             print("To be checked $last = $checktot<br>");
-            print("<table><tr style=\"text-align: center\"><td>Record</td><td>Time</td><td style=\"width: 100px\">Query</td><td>URL</td><td>Why Blocked</td><td style=\"width: 200px\">Referral</td></tr>");
+            print('<table><tr style="text-align: center"><td>Record</td><td>Time</td><td style="width: 100px">Query</td><td>URL</td><td>Why Blocked</td><td style="width: 200px">Referral</td></tr>');
         }
         
         // if we have already processed some of this day, store previous totals
@@ -159,9 +159,9 @@ foreach ($csvFile as $line) {
 }
 // new day       
 $i = 0;
-print("</table>");
+print('</table>');
 if ($tot === 0) {
-    print("No Data !!. ZBblock DB not updated.");
+    print('No Data !!. ZBblock DB not updated.');
     exit;
 } else {
     // create new totals for the day
@@ -181,7 +181,7 @@ if ($tot === 0) {
     print("Total of Blocks on $date = $tot<br>");
     print("To be checked $date = $checktot<br>");
     print("Last Block Id = $record");
-    print("</body></html>");
+    print('</body></html>');
     // send mail if requested
     if ($email) {
         $message = "Number of Blocks yesterday = $tot\r\nTo be checked = $checktot\r\n";
