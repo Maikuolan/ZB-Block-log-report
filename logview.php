@@ -29,6 +29,7 @@ print("<table><tr style=\"text-align: center\"><td>Time</td><td>Record</td><td s
                if ($row = mysqli_fetch_array($result)) {
     
                  $lastrecord = $row["total"];
+		$email = $row["why"];
                }
 // store blocks we are not interested in 
         $result = mysqli_query ($db, "SELECT * FROM zbblock
@@ -191,6 +192,12 @@ $botsCount= count($bots);
         print("To be checked $date = $checktot<br>");   
         print("Last Block Id = $record");
         print("</body></html>");
+// send mail if requested
+        if($email) {
+        $message = "Number of Blocks yesterday = $tot\r\nTo be checked = $checktot\r\n";
+        $message = wordwrap($message, 70, "\r\n");
+        mail($email, 'Zbblock stats', $message);
+        }
 	// save log file and delete it                 
 	// what about move/rename?
 	copy('zbblock/vault/killed_log.csv', 'zbblock/vault/copykilled_log.csv');
