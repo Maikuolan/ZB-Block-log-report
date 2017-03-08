@@ -164,7 +164,6 @@ if ($tot === 0) {
     exit('No Data !!. ZBblock DB not updated.');
 } else {
     // create new totals for the day
-    $botsCount = count($bots);
     while ($i < $botsCount) {
         mysqli_query($db, "INSERT into zbblock set type = '2', date = '$date', why = '$bots[$i]', total = '$totals[$i]'");
         print("$date $bots[$i] $totals[$i]<br>");
