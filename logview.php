@@ -7,8 +7,8 @@ include 'xxx/yyy.inc';
 $filename = 'zbblock/vault/killed_log.csv';
 
 if (!file_exists($filename)) {
-    print("$filename Does not Exist");
-    exit; // what about touch()?
+    exit("$filename Does not Exist");
+    // what about touch()?
 }
 
 $csvFile  = file($filename);
@@ -19,6 +19,7 @@ $totals   = array();
 $firstday = 0;
 $firstbot = 0;
 $checktot = 0;
+$botsCount= 0;
 
 print('<html><body>');
 print('<table><tr style="text-align: center"><td>Time</td><td>Record</td><td style="width: 100px">Query</td><td>URL</td><td>Why Blocked</td><td style="width: 200px">Referral</td></tr>');
@@ -42,6 +43,7 @@ if ($row = mysqli_fetch_array($result)) {
         $ind++;
     } while ($row = mysqli_fetch_array($result));
 }
+$botsCount = count($bots);
 // step through log file
 
 foreach ($csvFile as $line) {
@@ -64,7 +66,6 @@ foreach ($csvFile as $line) {
         } else {
             $i = 0;
             print('</table>');
-            $botsCount = count($bots);
             while ($i < $botsCount) {
                 // store totals for each block we dont list           
                 mysqli_query($db, "INSERT into zbblock set type = '2', date = '$last', why = '$bots[$i]', total = '$totals[$i]'");
@@ -138,7 +139,6 @@ foreach ($csvFile as $line) {
     $found     = 0;
     // increment uninterested total - one error type only
     $i         = 0;
-    $botsCount = count($bots);
     while ($i < $botsCount) {
         if ($found === 0) {
             if (stristr($why, $bots[$i])) {
@@ -161,8 +161,7 @@ foreach ($csvFile as $line) {
 $i = 0;
 print('</table>');
 if ($tot === 0) {
-    print('No Data !!. ZBblock DB not updated.');
-    exit;
+    exit('No Data !!. ZBblock DB not updated.');
 } else {
     // create new totals for the day
     $botsCount = count($bots);
