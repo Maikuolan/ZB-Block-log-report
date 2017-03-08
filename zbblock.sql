@@ -13,15 +13,15 @@
 
 -- Dumping structure for table test.zbblock
 CREATE TABLE IF NOT EXISTS `zbblock` (
-  `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `date` varchar(10) NOT NULL DEFAULT '0',
-  `type` tinyint(4) NOT NULL DEFAULT '0',
-  `why` varchar(500) DEFAULT NULL,
+  `type` tinyint(1) NOT NULL DEFAULT '0',
+  `why` varchar(50) DEFAULT NULL,
   `total` mediumint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `date` (`date`),
   KEY `type` (`type`)
-) ENGINE=MyISAM AUTO_INCREMENT=479 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table test.zbblock: 112 rows
 /*!40000 ALTER TABLE `zbblock` DISABLE KEYS */;
